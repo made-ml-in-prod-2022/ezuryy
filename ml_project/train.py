@@ -1,4 +1,6 @@
 import pandas as pd
+import pickle
+import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
@@ -22,9 +24,14 @@ def train_model(config_path: str):
     scaler.fit(X)
     X_train = scaler.transform(X_train)
     X_val = scaler.transform(X_val)
-    pca = PCA(n_components=10, svd_solver='randomized', random_state=123)
-    X_train = pca.fit_transform(X_train)
-    X_val = pca.transform(X_val)
-    clf = LogisticRegression(random_state=0, penalty='l2', C=0.9).fit(X_train, y_train)
+    # pca = PCA(n_components=10, svd_solver='randomized', random_state=123)
+    # X_train = pca.fit_transform(X_train)
+    # X_val = pca.transform(X_val)
+    model = LogisticRegression(random_state=0, penalty='l2', C=0.9).fit(X_train, y_train)
     # clf.predict(X_val)
-    print(clf.score(X_val, y_val))
+    with open(params.output_scaler_path, "wb") as f:
+        joblib.dump(scaler, f)
+    with open(params.output_model_path, "wb") as f:
+        pickle.dump(model, f)
+
+    print('Accuracy: ', model.score(X_val, y_val))

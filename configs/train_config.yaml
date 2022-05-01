@@ -1,4 +1,5 @@
 input_data_path: "data/heart_cleveland_upload.csv"
+output_scaler_path: "model/scaler.joblib"
 output_model_path: "model/model.pkl"
 features:
   categorical_features:
