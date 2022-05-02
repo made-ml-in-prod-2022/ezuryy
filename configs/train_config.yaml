@@ -1,6 +1,8 @@
-input_data_path: "data/heart_cleveland_upload.csv"
-output_scaler_path: "model/scaler.joblib"
-output_model_path: "model/model.pkl"
+input_train_data_path: "data/train_data.csv"
+input_test_data_path: "data/test_data.csv"
+scaler_path: "model/scaler.joblib"
+model_path: "model/model.pkl"
+predict_path: "data/predict.csv"
 features:
   categorical_features:
     - "sex"

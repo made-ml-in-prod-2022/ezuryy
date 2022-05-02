@@ -7,9 +7,11 @@ from ml_project.features import Features
 
 @dataclass()
 class TrainingParams:
-    input_data_path: str
-    output_scaler_path: str
-    output_model_path: str
+    input_train_data_path: str
+    input_test_data_path: str
+    scaler_path: str
+    model_path: str
+    predict_path: str
     features: Features
 
 
