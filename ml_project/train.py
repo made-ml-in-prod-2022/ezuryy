@@ -6,7 +6,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn import metrics
 
-from ml_project.read_config import read_training_params, TrainingParams
+from read_config import read_training_params, TrainingParams
+from fix_path import fix_path, fix_config
 
 
 def preprocess_train_data(data: pd.DataFrame, params: TrainingParams) -> pd.DataFrame:
@@ -31,7 +32,8 @@ def preprocess_train_data(data: pd.DataFrame, params: TrainingParams) -> pd.Data
 
 
 def train_model(config_path: str):
-    params = read_training_params(config_path)
+    config_path = fix_path(config_path)
+    params = fix_config(read_training_params(config_path))
     target_col = params.features.target_col
     data = pd.read_csv(params.input_train_data_path)
     y = data[target_col].values
@@ -50,3 +52,7 @@ def train_model(config_path: str):
     print("Accuracy: ", metrics.accuracy_score(y_val, predict))
     print("ROC AUC score: ", metrics.roc_auc_score(y_val, predict))
     print("F1-score: ", metrics.f1_score(y_val, predict))
+
+
+if __name__ == '__main__':
+    train_model('configs/train_config.yaml')

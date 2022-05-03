@@ -2,7 +2,7 @@ from marshmallow_dataclass import class_schema
 from dataclasses import dataclass
 import yaml
 
-from ml_project.features import Features
+from features import Features
 
 
 @dataclass()

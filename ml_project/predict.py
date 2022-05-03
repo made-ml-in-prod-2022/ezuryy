@@ -3,7 +3,8 @@ import pickle
 import joblib
 from sklearn import metrics
 
-from ml_project.read_config import read_training_params, TrainingParams
+from read_config import read_training_params, TrainingParams
+from fix_path import fix_path, fix_config
 
 
 def preprocess_test_data(data: pd.DataFrame, params: TrainingParams) -> pd.DataFrame:
@@ -28,7 +29,8 @@ def preprocess_test_data(data: pd.DataFrame, params: TrainingParams) -> pd.DataF
 
 
 def predict(config_path: str):
-    params = read_training_params(config_path)
+    config_path = fix_path(config_path)
+    params = fix_config(read_training_params(config_path))
     target_col = params.features.target_col
     data = pd.read_csv(params.input_test_data_path)
 
@@ -47,3 +49,7 @@ def predict(config_path: str):
     predict_df = pd.DataFrame({target_col: predict})
     predict_df.to_csv(params.predict_path, index=False)
     print(predict_df.head())
+
+
+if __name__ == '__main__':
+    predict('configs/train_config.yaml')
