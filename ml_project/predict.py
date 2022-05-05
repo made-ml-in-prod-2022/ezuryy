@@ -1,31 +1,9 @@
 import pandas as pd
 import pickle
-import joblib
 from sklearn import metrics
 
-from read_config import read_training_params, TrainingParams
-from fix_path import fix_path, fix_config
-
-
-def preprocess_test_data(data: pd.DataFrame, params: TrainingParams) -> pd.DataFrame:
-    cat_features = params.features.categorical_features
-    num_features = params.features.numerical_features
-
-    df_test_cat = data[cat_features]
-    df_test_num = data[num_features]
-
-    cat_columns = df_test_cat.columns
-    num_columns = df_test_num.columns
-
-    with open(params.scaler_path, "rb") as f:
-        scaler = joblib.load(f)
-
-    df_cat = pd.get_dummies(df_test_cat, columns=cat_columns, prefix=cat_columns)
-
-    transformed_num = scaler.transform(df_test_num.to_numpy())
-    df_num = pd.DataFrame(transformed_num, columns=num_columns)
-
-    return pd.concat([df_cat, df_num], axis=1)
+from enities import read_training_params, fix_path, fix_config
+from features import preprocess_test_data
 
 
 def predict(config_path: str):

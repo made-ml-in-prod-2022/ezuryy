@@ -11,12 +11,12 @@ pip install -r requirements.txt
 
 Обучение модели:
 ~~~
-python ml_example/train.py
+python ml_project/train.py
 ~~~
 
 Создание предикта:
 ~~~
-python ml_example/predict.py
+python ml_project/predict.py
 ~~~
 
 
