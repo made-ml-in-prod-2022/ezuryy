@@ -1,11 +1,11 @@
 import pandas as pd
-
+import click
 from enities import read_training_params, fix_path, fix_config
 from features import preprocess_test_data
 from models import open_model, evaluate_model, save_predict
 
 
-def predict(config_path: str):
+def predict_model(config_path: str):
     config_path = fix_path(config_path)
     params = fix_config(read_training_params(config_path))
     target_col = params.features.target_col
@@ -24,5 +24,14 @@ def predict(config_path: str):
     save_predict(target_col, predict, params.predict_path)
 
 
+@click.command(name="predict_model")
+@click.argument("config_path")
+def predict_model_command(config_path: str):
+    predict_model(config_path)
+
+
 if __name__ == '__main__':
-    predict('configs/train_config.yaml')
+    predict_model_command()
+
+# if __name__ == '__main__':
+#     predict_model('configs/config1.yaml')

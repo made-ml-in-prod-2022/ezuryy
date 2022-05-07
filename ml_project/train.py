@@ -1,4 +1,5 @@
 import pandas as pd
+import click
 from sklearn.linear_model import LogisticRegression
 
 from data import split_train_val_data
@@ -26,5 +27,14 @@ def train_model(config_path: str):
     evaluate_model(predict, y_val)
 
 
+@click.command(name="train_model")
+@click.argument("config_path")
+def train_model_command(config_path: str):
+    train_model(config_path)
+
+
 if __name__ == '__main__':
-    train_model('configs/train_config.yaml')
+    train_model_command()
+
+# if __name__ == '__main__':
+#     train_model('configs/config1.yaml')

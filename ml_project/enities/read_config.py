@@ -27,8 +27,8 @@ def read_training_params(path: str) -> TrainingParams:
 
 
 def fix_path(path: str) -> str:
-    return '../' + path
-    # return path  # sometimes we need ('../' + path)
+    # return '../' + path
+    return path  # sometimes we need ('../' + path)
 
 
 def fix_config(params: TrainingParams) -> TrainingParams:
