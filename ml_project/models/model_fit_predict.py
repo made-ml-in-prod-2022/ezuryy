@@ -2,11 +2,27 @@ import pandas as pd
 import numpy as np
 import pickle
 import logging
+from typing import Union
 from sklearn.linear_model import LogisticRegression
+from sklearn.naive_bayes import GaussianNB
 from sklearn import metrics
+
+from enities import TrainingParams
 
 logging.basicConfig(level='INFO')
 logger = logging.getLogger(__name__)
+
+
+def get_model(params: TrainingParams) -> Union[LogisticRegression, GaussianNB]:
+    logger.info(f'Model type:{params.model_type}')
+    if params.model_type == 'LogisticRegression':
+        model = LogisticRegression(random_state=0, penalty='l2', C=0.9)
+    elif params.model_type == 'GaussianNB':
+        model = GaussianNB()
+    else:
+        logger.warning('No such model_type! Use LogisticRegression')
+        model = LogisticRegression(random_state=0, penalty='l2', C=0.9)
+    return model
 
 
 def evaluate_model(predict: np.ndarray, target: np.ndarray):

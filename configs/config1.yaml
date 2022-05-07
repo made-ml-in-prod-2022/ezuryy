@@ -3,6 +3,7 @@ input_test_data_path: "data/test_data.csv"
 scaler_path: "model/scaler.joblib"
 model_path: "model/model.pkl"
 predict_path: "data/predict.csv"
+model_type: "LogisticRegression"
 features:
   categorical_features:
     - "sex"

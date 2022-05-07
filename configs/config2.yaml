@@ -3,6 +3,7 @@ input_test_data_path: "data/test_data.csv"
 scaler_path: "model/scaler.joblib"
 model_path: "model/model.pkl"
 predict_path: "data/predict.csv"
+model_type: "GaussianNB"
 features:
   categorical_features:
     - "sex"
@@ -23,4 +24,4 @@ features:
 splitting_params:
   val_size: 0.2
   random_state: 42
-  stratify: False
+  stratify: True

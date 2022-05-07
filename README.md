@@ -11,12 +11,12 @@ pip install -r requirements.txt
 
 Обучение модели:
 ~~~
-python ml_project/train.py
+python ml_project/train.py configs/config1.yaml
 ~~~
 
 Создание предикта:
 ~~~
-python ml_project/predict.py
+python ml_project/predict.py configs/config1.yaml
 ~~~
 
 

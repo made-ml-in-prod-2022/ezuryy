@@ -13,6 +13,7 @@ class TrainingParams:
     scaler_path: str
     model_path: str
     predict_path: str
+    model_type: str
     features: Features
     splitting_params: SplittingParams
 
