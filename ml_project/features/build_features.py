@@ -8,6 +8,13 @@ from sklearn.preprocessing import StandardScaler
 from enities import TrainingParams
 
 
+def extract_target(data: pd.DataFrame, params: TrainingParams) -> (pd.DataFrame, pd.Series):
+    target_col = params.features.target_col
+    target = data[target_col].values
+    data = data.drop(columns=[target_col])
+    return data, target
+
+
 def preprocess_train_data(data: pd.DataFrame, params: TrainingParams) -> pd.DataFrame:
     cat_features = params.features.categorical_features
     num_features = params.features.numerical_features

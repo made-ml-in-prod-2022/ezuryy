@@ -1,9 +1,8 @@
 import pandas as pd
-import pickle
-from sklearn import metrics
 
 from enities import read_training_params, fix_path, fix_config
 from features import preprocess_test_data
+from models import open_model, evaluate_model, save_predict
 
 
 def predict(config_path: str):
@@ -14,19 +13,15 @@ def predict(config_path: str):
 
     X_test = preprocess_test_data(data, params)
 
-    with open(params.model_path, "rb") as f:
-        model = pickle.load(f)
+    model = open_model(params.model_path)
 
     predict = model.predict(X_test)
 
     answer = pd.read_csv(params.input_train_data_path)[target_col]
-    print("Accuracy: ", metrics.accuracy_score(answer, predict))
-    print("ROC AUC score: ", metrics.roc_auc_score(answer, predict))
-    print("F1-score: ", metrics.f1_score(answer, predict))
 
-    predict_df = pd.DataFrame({target_col: predict})
-    predict_df.to_csv(params.predict_path, index=False)
-    print(predict_df.head())
+    evaluate_model(predict, answer)
+
+    save_predict(target_col, predict, params.predict_path)
 
 
 if __name__ == '__main__':

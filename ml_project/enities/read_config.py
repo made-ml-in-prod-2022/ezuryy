@@ -3,6 +3,7 @@ from dataclasses import dataclass
 import yaml
 
 from .features import Features
+from .split_params import SplittingParams
 
 
 @dataclass()
@@ -13,6 +14,7 @@ class TrainingParams:
     model_path: str
     predict_path: str
     features: Features
+    splitting_params: SplittingParams
 
 
 TrainingParamsSchema = class_schema(TrainingParams)
@@ -25,7 +27,8 @@ def read_training_params(path: str) -> TrainingParams:
 
 
 def fix_path(path: str) -> str:
-    return path  # sometimes we need ('../' + path)
+    return '../' + path
+    # return path  # sometimes we need ('../' + path)
 
 
 def fix_config(params: TrainingParams) -> TrainingParams:
