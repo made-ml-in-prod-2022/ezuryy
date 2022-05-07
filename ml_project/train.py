@@ -1,5 +1,4 @@
 import pandas as pd
-from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 
 from data import split_train_val_data
@@ -18,9 +17,6 @@ def train_model(config_path: str):
     X = preprocess_train_data(data, params)
 
     X_train, X_val, y_train, y_val = split_train_val_data(X, y, params)
-    # train_test_split(
-    #     X, y, test_size=0.1, random_state=0, stratify=y
-    # )
 
     model = LogisticRegression(random_state=0, penalty='l2', C=0.9).fit(X_train, y_train)
 

@@ -1,36 +1,8 @@
 import pandas as pd
 import numpy as np
 import pickle
-from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn import metrics
-
-# from enities import read_training_params, fix_path, fix_config
-# from features import preprocess_test_data
-
-
-# def train_model(
-#     features: pd.DataFrame, target: pd.Series, train_params: TrainingParams
-# ) -> SklearnRegressionModel:
-#     if train_params.model_type == "RandomForestRegressor":
-#         model = RandomForestRegressor(
-#             n_estimators=100, random_state=train_params.random_state
-#         )
-#     elif train_params.model_type == "LinearRegression":
-#         model = LinearRegression()
-#     else:
-#         raise NotImplementedError()
-#     model.fit(features, target)
-#     return model
-#
-#
-# def predict_model(
-#     model: Pipeline, features: pd.DataFrame, use_log_trick: bool = True
-# ) -> np.ndarray:
-#     predicts = model.predict(features)
-#     if use_log_trick:
-#         predicts = np.exp(predicts)
-#     return predicts
 
 
 def evaluate_model(predict: np.ndarray, target: np.ndarray):
