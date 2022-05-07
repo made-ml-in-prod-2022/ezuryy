@@ -1,11 +1,12 @@
-# import sys
-# sys.path.append("..")
-
 import pandas as pd
 import joblib
+import logging
 from sklearn.preprocessing import StandardScaler
 
 from enities import TrainingParams
+
+logging.basicConfig(level='INFO')
+logger = logging.getLogger(__name__)
 
 
 def extract_target(data: pd.DataFrame, params: TrainingParams) -> (pd.DataFrame, pd.Series):
@@ -18,6 +19,9 @@ def extract_target(data: pd.DataFrame, params: TrainingParams) -> (pd.DataFrame,
 def preprocess_train_data(data: pd.DataFrame, params: TrainingParams) -> pd.DataFrame:
     cat_features = params.features.categorical_features
     num_features = params.features.numerical_features
+
+    logger.info(f'Preprocess train data parameters: categorical parameters = {cat_features}, '
+                f'numerical_features = {num_features}, target_col = {params.features.target_col}')
 
     df_train_cat = data[cat_features]
     df_train_num = data[num_features]
@@ -39,6 +43,9 @@ def preprocess_train_data(data: pd.DataFrame, params: TrainingParams) -> pd.Data
 def preprocess_test_data(data: pd.DataFrame, params: TrainingParams) -> pd.DataFrame:
     cat_features = params.features.categorical_features
     num_features = params.features.numerical_features
+
+    logger.info(f'Preprocess test data parameters: categorical parameters = {cat_features}, '
+                f'numerical_features = {num_features}, target_col = {params.features.target_col}')
 
     df_test_cat = data[cat_features]
     df_test_num = data[num_features]
