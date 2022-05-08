@@ -10,8 +10,9 @@ def test_split_train_val_data(params: TrainingParams):
     data = pd.read_csv(params.input_train_data_path)
     target = data[params.features.target_col]
     data.drop(columns=[params.features.target_col], inplace=True)
-    train_data, val_data, train_target, val_target = \
-        split_train_val_data(data, target, params)
+    train_data, val_data, train_target, val_target = split_train_val_data(
+        data, target, params
+    )
 
     val_size = params.splitting_params.val_size
     expected_val_size = int(val_size * data.shape[0])

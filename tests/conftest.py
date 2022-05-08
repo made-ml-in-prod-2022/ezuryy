@@ -13,35 +13,17 @@ def target_col():
 
 @pytest.fixture(scope="session")
 def categorical_features() -> List[str]:
-    return [
-        "sex",
-        "cp",
-        "fbs",
-        "restecg",
-        "exang",
-        "slope",
-        "thal"
-    ]
+    return ["sex", "cp", "fbs", "restecg", "exang", "slope", "thal"]
 
 
 @pytest.fixture(scope="session")
 def numerical_features() -> List[str]:
-    return [
-        "age",
-        "trestbps",
-        "chol",
-        "thalach",
-        "oldpeak",
-        "ca"
-    ]
+    return ["age", "trestbps", "chol", "thalach", "oldpeak", "ca"]
 
 
 @pytest.fixture()
 def params(
-        categorical_features,
-        numerical_features,
-        target_col,
-        tmpdir
+    categorical_features, numerical_features, target_col, tmpdir
 ) -> TrainingParams:
     np.random.seed(42)
     rows_number = 100
@@ -53,7 +35,7 @@ def params(
         data[col] = column
 
     for col in numerical_features:
-        column = np.random.randint(200., size=rows_number)
+        column = np.random.randint(200.0, size=rows_number)
         data[col] = column
 
     test_filename = tmpdir.mkdir("tmpdir").join("test_data.csv")
@@ -68,7 +50,7 @@ def params(
     features = Features(
         categorical_features=categorical_features,
         numerical_features=numerical_features,
-        target_col=target_col
+        target_col=target_col,
     )
     params = TrainingParams(
         input_train_data_path=train_filename,
@@ -78,8 +60,6 @@ def params(
         predict_path=predict_p,
         model_type="LogisticRegression",
         features=features,
-        splitting_params=SplittingParams(
-            val_size=0.1, random_state=42, stratify=True
-        )
+        splitting_params=SplittingParams(val_size=0.1, random_state=42, stratify=True),
     )
     return params

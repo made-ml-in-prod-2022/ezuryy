@@ -22,4 +22,6 @@ jobs:
       - name: Tests report
         run: python -m pytest --cov=ml_project tests
       - name: Run flake8
-        run: flake8 .
+        run: flake8 --max-line-length 90 .
+      - name: Run black
+        run: black ml_project --check

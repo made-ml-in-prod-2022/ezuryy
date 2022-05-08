@@ -3,7 +3,7 @@ from ml_project import (
     extract_target,
     preprocess_train_data,
     preprocess_test_data,
-    run_train_pipeline
+    run_train_pipeline,
 )
 
 

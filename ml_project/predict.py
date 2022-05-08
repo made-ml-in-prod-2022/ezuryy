@@ -15,5 +15,5 @@ def predict_model_command(config_path: str):
     predict_model(config_path)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     predict_model_command()

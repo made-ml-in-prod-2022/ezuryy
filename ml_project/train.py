@@ -16,5 +16,5 @@ def train_model_command(config_path: str):
     train_model(config_path)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     train_model_command()

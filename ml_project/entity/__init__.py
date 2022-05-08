@@ -1,9 +1,5 @@
 from .features import Features
-from .read_config import (
-    TrainingParams,
-    read_training_params,
-    fix_path, fix_config
-)
+from .read_config import TrainingParams, read_training_params, fix_path, fix_config
 from .split_params import SplittingParams
 
 __all__ = [
@@ -12,5 +8,5 @@ __all__ = [
     "TrainingParams",
     "read_training_params",
     "fix_path",
-    "fix_config"
+    "fix_config",
 ]
