@@ -1,8 +1,6 @@
-import pandas as pd
 import click
 from entity import read_training_params, fix_path, fix_config
-from features import preprocess_test_data
-from models import run_test_pipeline, open_model, evaluate_model, save_predict
+from models import run_test_pipeline
 
 
 def predict_model(config_path: str):
@@ -19,6 +17,3 @@ def predict_model_command(config_path: str):
 
 if __name__ == '__main__':
     predict_model_command()
-
-# if __name__ == '__main__':
-#     predict_model('configs/config1.yaml')

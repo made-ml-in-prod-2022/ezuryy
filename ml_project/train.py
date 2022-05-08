@@ -18,6 +18,3 @@ def train_model_command(config_path: str):
 
 if __name__ == '__main__':
     train_model_command()
-
-# if __name__ == '__main__':
-#     train_model('configs/config1.yaml')
