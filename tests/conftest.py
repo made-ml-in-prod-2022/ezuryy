@@ -37,7 +37,12 @@ def numerical_features() -> List[str]:
 
 
 @pytest.fixture()
-def params(categorical_features, numerical_features, target_col, tmpdir) -> TrainingParams:
+def params(
+        categorical_features,
+        numerical_features,
+        target_col,
+        tmpdir
+) -> TrainingParams:
     np.random.seed(42)
     rows_number = 100
     data = pd.DataFrame()
@@ -73,6 +78,8 @@ def params(categorical_features, numerical_features, target_col, tmpdir) -> Trai
         predict_path=predict_p,
         model_type="LogisticRegression",
         features=features,
-        splitting_params=SplittingParams(val_size=0.1, random_state=42, stratify=True)
+        splitting_params=SplittingParams(
+            val_size=0.1, random_state=42, stratify=True
+        )
     )
     return params

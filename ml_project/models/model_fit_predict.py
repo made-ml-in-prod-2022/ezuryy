@@ -9,13 +9,19 @@ from sklearn import metrics
 
 from ml_project.entity import TrainingParams
 from ml_project.data import split_train_val_data
-from ml_project.features import preprocess_train_data, preprocess_test_data, extract_target
+from ml_project.features import (
+    preprocess_train_data,
+    preprocess_test_data,
+    extract_target
+)
 
 logging.basicConfig(level='INFO')
 logger = logging.getLogger(__name__)
 
 
-def get_model(params: TrainingParams) -> Union[LogisticRegression, GaussianNB]:
+def get_model(
+        params: TrainingParams
+) -> Union[LogisticRegression, GaussianNB]:
     logger.info(f'Model type:{params.model_type}')
     if params.model_type == 'LogisticRegression':
         model = LogisticRegression(random_state=0, penalty='l2', C=0.9)
@@ -27,7 +33,10 @@ def get_model(params: TrainingParams) -> Union[LogisticRegression, GaussianNB]:
     return model
 
 
-def evaluate_model(predict: np.ndarray, target: np.ndarray) -> Dict[str, float]:
+def evaluate_model(
+        predict: np.ndarray,
+        target: np.ndarray
+) -> Dict[str, float]:
     result_metrics = {
         "Accuracy": metrics.accuracy_score(target, predict),
         "ROC AUC score": metrics.roc_auc_score(target, predict),
@@ -63,7 +72,8 @@ def run_train_pipeline(params: TrainingParams) -> Dict[str, float]:
 
     full_data = preprocess_train_data(data, params)
 
-    train_data, val_data, train_target, val_target = split_train_val_data(full_data, target, params)
+    train_data, val_data, train_target, val_target = \
+        split_train_val_data(full_data, target, params)
 
     model = get_model(params)
     model.fit(train_data, train_target)

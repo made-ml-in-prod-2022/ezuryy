@@ -22,11 +22,17 @@ def split_train_val_data(
 
     if stratify:
         train_data, val_data, train_target, val_target = train_test_split(
-            data, target, test_size=val_size, random_state=random_state, stratify=target
+            data, target,
+            test_size=val_size,
+            random_state=random_state,
+            stratify=target
         )
     else:
         train_data, val_data, train_target, val_target = train_test_split(
-            data, target, test_size=val_size, random_state=random_state
+            data,
+            target,
+            test_size=val_size,
+            random_state=random_state
         )
 
     return train_data, val_data, train_target, val_target
