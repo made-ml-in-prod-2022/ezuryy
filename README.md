@@ -19,6 +19,10 @@ python ml_project/train.py configs/config1.yaml
 python ml_project/predict.py configs/config1.yaml
 ~~~
 
+Запуск тестов:
+~~~
+python -m pytest tests
+~~~
 
 Требуется сделать "production ready" проект для решения задачи классификации, то есть написать код для обучения и предикта, покрыть его тестами и тд.
 
@@ -56,3 +60,23 @@ python ml_project/predict.py configs/config1.yaml
 - [x] Настроен CI для прогона тестов, линтера на основе github actions (3 балла).
 Пример с пары: https://github.com/demo-ml-cicd/ml-python-package
 - [ ] Используется hydra  (https://hydra.cc/docs/intro/) (3 балла - доп баллы)
+
+Структура проекта:
+~~~
+├── configs             <- Folder with configuration files
+├── data_csv            <- Folder for train/test/predict .csv data
+├── ml_project          <- Folder with .py code
+│   ├── data            <- Code for splitting data to train and validation
+│   ├── entity          <- Code for reading configuration file
+│   ├── features        <- Code for preprocess data (OHE, Scaler)
+│   └── models          <- Code to evaluate, save/open model. 
+│                          Contain mail logic of train/test models
+├── model               <- Folder with .py code
+├── notebooks           <- Folder with IPYNB code experiments, 
+│                          HTML report, file for generating 
+│                          HTML report from IPYNB file
+└── tests               <- Folder with tests of ml_project folder
+    ├── data            <- Test data module
+    ├── features        <- Test features module
+    └── models          <- Test models module
+~~~
