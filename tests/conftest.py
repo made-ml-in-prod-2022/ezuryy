@@ -53,9 +53,9 @@ def params(categorical_features, numerical_features, target_col, tmpdir) -> Trai
 
     test_filename = tmpdir.mkdir("tmpdir").join("test_data.csv")
     train_filename = tmpdir.join("tmpdir/train_data.csv")
-    data.to_csv(test_filename)
+    data.to_csv(test_filename, index_label=False)
     data[target_col] = np.random.choice([0, 1], rows_number)
-    data.to_csv(train_filename)
+    data.to_csv(train_filename, index_label=False)
 
     features = Features(
         categorical_features=categorical_features,
