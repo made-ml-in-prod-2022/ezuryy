@@ -9,3 +9,5 @@ pandas==1.1.5
 boto3==1.17.49
 mlflow==1.15.0
 pytest==6.2.3
+coverage==6.3.2
+pytest-cov==3.0.0
