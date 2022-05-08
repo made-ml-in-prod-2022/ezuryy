@@ -70,10 +70,10 @@ python -m pytest tests
 │   ├── entity          <- Code for reading configuration file
 │   ├── features        <- Code for preprocess data (OHE, Scaler)
 │   └── models          <- Code to evaluate, save/open model. 
-│                          Contain mail logic of train/test models
+│                          Contain main logic of train/test models
 ├── model               <- Folder with .py code
 ├── notebooks           <- Folder with IPYNB code experiments, 
-│                          HTML report, file for generating 
+│                          HTML report and python script for generating 
 │                          HTML report from IPYNB file
 └── tests               <- Folder with tests of ml_project folder
     ├── data            <- Test data module
