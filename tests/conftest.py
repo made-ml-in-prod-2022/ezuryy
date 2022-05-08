@@ -37,7 +37,7 @@ def numerical_features() -> List[str]:
 
 
 @pytest.fixture()
-def params(categorical_features, numerical_features, target_col) -> TrainingParams:
+def params(categorical_features, numerical_features, target_col, tmpdir) -> TrainingParams:
     np.random.seed(42)
     rows_number = 100
     data = pd.DataFrame()
@@ -51,8 +51,8 @@ def params(categorical_features, numerical_features, target_col) -> TrainingPara
         column = np.random.randint(200., size=rows_number)
         data[col] = column
 
-    test_filename = "tmpdir/test_data.csv"
-    train_filename = "tmpdir/train_data.csv"
+    test_filename = tmpdir.mkdir("tmpdir").join("test_data.csv")
+    train_filename = tmpdir.join("tmpdir/train_data.csv")
     data.to_csv(test_filename)
     data[target_col] = np.random.choice([0, 1], rows_number)
     data.to_csv(train_filename)
@@ -72,5 +72,4 @@ def params(categorical_features, numerical_features, target_col) -> TrainingPara
         features=features,
         splitting_params=SplittingParams(val_size=0.1, random_state=42, stratify=True)
     )
-
     return params

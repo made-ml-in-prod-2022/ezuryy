@@ -8,9 +8,8 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn import metrics
 
 from ml_project.entity import TrainingParams
-# from entity import TrainingParams
 from ml_project.data import split_train_val_data
-from ml_project.features import preprocess_train_data, extract_target
+from ml_project.features import preprocess_train_data, preprocess_test_data, extract_target
 
 logging.basicConfig(level='INFO')
 logger = logging.getLogger(__name__)
@@ -73,4 +72,23 @@ def run_train_pipeline(params: TrainingParams) -> Dict[str, float]:
 
     predict = model.predict(val_data)
     result_metrics = evaluate_model(predict, val_target)
+    return result_metrics
+
+
+def run_test_pipeline(params: TrainingParams):
+    target_col = params.features.target_col
+    data = pd.read_csv(params.input_test_data_path)
+
+    test_data = preprocess_test_data(data, params)
+
+    model = open_model(params.model_path)
+
+    predict = model.predict(test_data)
+
+    answer = pd.read_csv(params.input_train_data_path)[target_col]
+
+    result_metrics = evaluate_model(predict, answer)
+
+    save_predict(target_col, predict, params.predict_path)
+
     return result_metrics
