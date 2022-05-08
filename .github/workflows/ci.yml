@@ -20,6 +20,6 @@ jobs:
       - name: Run tests
         run: python -m pytest tests
       - name: Tests report
-        run: python -m pytest --cov=ml_project tests
+        run: python -m pytest --cov=/home/runner/work/ezuryy/ezuryy/ml_project tests
       - name: Run flake8
         run: flake8 .
