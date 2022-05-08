@@ -3,7 +3,8 @@ import joblib
 import logging
 from sklearn.preprocessing import StandardScaler
 
-from enities import TrainingParams
+from ml_project.entity import TrainingParams
+# from entity import TrainingParams
 
 logging.basicConfig(level='INFO')
 logger = logging.getLogger(__name__)

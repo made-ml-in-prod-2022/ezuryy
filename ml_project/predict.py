@@ -1,6 +1,6 @@
 import pandas as pd
 import click
-from enities import read_training_params, fix_path, fix_config
+from entity import read_training_params, fix_path, fix_config
 from features import preprocess_test_data
 from models import open_model, evaluate_model, save_predict
 
@@ -19,9 +19,11 @@ def predict_model(config_path: str):
 
     answer = pd.read_csv(params.input_train_data_path)[target_col]
 
-    evaluate_model(predict, answer)
+    metrics = evaluate_model(predict, answer)
 
     save_predict(target_col, predict, params.predict_path)
+
+    return metrics
 
 
 @click.command(name="predict_model")

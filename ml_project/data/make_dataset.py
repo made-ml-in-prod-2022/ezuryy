@@ -4,7 +4,8 @@ import pandas as pd
 import numpy as np
 import logging
 
-from enities import TrainingParams
+from ml_project.entity import TrainingParams
+# from entity import TrainingParams
 
 logging.basicConfig(level='INFO')
 logger = logging.getLogger(__name__)
