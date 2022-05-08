@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 def split_train_val_data(
-        data: pd.DataFrame, target: pd.Series, params: TrainingParams
+        data: pd.DataFrame, target: np.ndarray, params: TrainingParams
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     val_size = params.splitting_params.val_size
     random_state = params.splitting_params.random_state

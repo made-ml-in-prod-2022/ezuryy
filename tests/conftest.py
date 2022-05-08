@@ -53,6 +53,9 @@ def params(categorical_features, numerical_features, target_col, tmpdir) -> Trai
 
     test_filename = tmpdir.mkdir("tmpdir").join("test_data.csv")
     train_filename = tmpdir.join("tmpdir/train_data.csv")
+    scaler_p = tmpdir.join("tmpdir/scaler.joblib")
+    model_p = tmpdir.join("tmpdir/model.pkl")
+    predict_p = tmpdir.join("tmpdir/predict.csv")
     data.to_csv(test_filename, index_label=False)
     data[target_col] = np.random.choice([0, 1], rows_number)
     data.to_csv(train_filename, index_label=False)
@@ -65,9 +68,9 @@ def params(categorical_features, numerical_features, target_col, tmpdir) -> Trai
     params = TrainingParams(
         input_train_data_path=train_filename,
         input_test_data_path=test_filename,
-        scaler_path="tmpdir/scaler.joblib",
-        model_path="tmpdir/model.pkl",
-        predict_path="tmpdir/predict.csv",
+        scaler_path=scaler_p,
+        model_path=model_p,
+        predict_path=predict_p,
         model_type="LogisticRegression",
         features=features,
         splitting_params=SplittingParams(val_size=0.1, random_state=42, stratify=True)

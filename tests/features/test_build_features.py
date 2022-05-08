@@ -1,5 +1,5 @@
 import pandas as pd
-from ml_project import extract_target, preprocess_train_data, preprocess_test_data
+from ml_project import extract_target, preprocess_train_data, preprocess_test_data, run_train_pipeline
 
 
 def test_extract_target(params):
@@ -32,6 +32,8 @@ def test_preprocess_train_data(params):
 
 
 def test_preprocess_test_data(params):
+    run_train_pipeline(params)
+
     data = pd.read_csv(params.input_test_data_path)
     preprocessed_data = preprocess_test_data(data, params)
 
