@@ -11,3 +11,4 @@ mlflow==1.15.0
 pytest==6.2.3
 coverage==6.3.2
 pytest-cov==3.0.0
+flake8==4.0.1
