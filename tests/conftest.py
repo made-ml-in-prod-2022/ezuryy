@@ -40,7 +40,8 @@ def params(
 
     test_filename = tmpdir.mkdir("tmpdir").join("test_data.csv")
     train_filename = tmpdir.join("tmpdir/train_data.csv")
-    scaler_p = tmpdir.join("tmpdir/scaler.joblib")
+    transformer_p = tmpdir.join("tmpdir/transformer.pkl")
+    ohe_p = tmpdir.join("tmpdir/ohe.pkl")
     model_p = tmpdir.join("tmpdir/model.pkl")
     predict_p = tmpdir.join("tmpdir/predict.csv")
     data.to_csv(test_filename, index_label=False)
@@ -55,7 +56,8 @@ def params(
     params = TrainingParams(
         input_train_data_path=train_filename,
         input_test_data_path=test_filename,
-        scaler_path=scaler_p,
+        transformer_path=transformer_p,
+        ohe_path=ohe_p,
         model_path=model_p,
         predict_path=predict_p,
         model_type="LogisticRegression",

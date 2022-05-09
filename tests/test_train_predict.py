@@ -13,7 +13,8 @@ def test_train(params: TrainingParams):
     assert metrics["ROC AUC score"] > 0
     assert metrics["F1-score"] > 0
     assert os.path.exists(params.model_path)
-    assert os.path.exists(params.scaler_path)
+    assert os.path.exists(params.transformer_path)
+    assert os.path.exists(params.ohe_path)
 
 
 def test_predict(params: TrainingParams):

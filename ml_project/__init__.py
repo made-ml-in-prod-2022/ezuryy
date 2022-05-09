@@ -7,7 +7,7 @@ from .entity import (
     fix_path,
     fix_config,
 )
-from .features import preprocess_train_data, preprocess_test_data, extract_target
+from .features import extract_target, preprocess_features
 from .models import (
     run_train_pipeline,
     run_test_pipeline,
@@ -26,8 +26,7 @@ __all__ = [
     "read_training_params",
     "fix_path",
     "fix_config",
-    "preprocess_train_data",
-    "preprocess_test_data",
+    "preprocess_features",
     "extract_target",
     "run_train_pipeline",
     "run_test_pipeline",
