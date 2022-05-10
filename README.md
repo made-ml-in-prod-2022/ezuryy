@@ -24,6 +24,11 @@ python ml_project/predict.py configs/config1.yaml
 python -m pytest tests
 ~~~
 
+Создание HTML отчета из ipynb ноутбука:
+~~~
+python notebooks/generate_html_report.py notebooks/notebook_with_experiments.ipynb 
+~~~
+
 Требуется сделать "production ready" проект для решения задачи классификации, то есть написать код для обучения и предикта, покрыть его тестами и тд.
 
 Для обучения модели использован небольшой датасет для классификации https://www.kaggle.com/datasets/cherngs/heart-disease-cleveland-uci.
