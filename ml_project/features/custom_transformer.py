@@ -1,6 +1,7 @@
 from typing import NoReturn
 
 import pandas as pd
+from sklearn.exceptions import NotFittedError
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
 from sklearn.base import (
@@ -13,15 +14,21 @@ from ml_project.entity import TrainingParams
 
 class CustomTransformer(BaseEstimator, TransformerMixin):
     def __init__(self, numerical_features) -> NoReturn:
-        # self.imputer = SimpleImputer(strategy="median")
         self.scaler = StandardScaler()
         self.numerical_features = numerical_features
+        self.fitted = False
+
+    def check_is_fitted(self):
+        if not self.fitted:
+            raise NotFittedError("CustomTransformer not fitted")
 
     def fit(self, data: pd.DataFrame):
         self.scaler.fit(data[self.numerical_features])
+        self.fitted = True
         return self
 
     def transform(self, data: pd.DataFrame):
+        self.check_is_fitted()
         data_copy = data[self.numerical_features].copy()
         data_copy = self.scaler.transform(data_copy)
         return data_copy

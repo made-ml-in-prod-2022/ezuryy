@@ -36,7 +36,7 @@ def evaluate_model(predict: np.ndarray, target: np.ndarray) -> Dict[str, float]:
         "F1-score": metrics.f1_score(target, predict),
     }
     for key in result_metrics:
-        print(key, " : ", result_metrics[key])
+        logger.info(f"{key}, : {result_metrics[key]}")
     return result_metrics
 
 
@@ -57,21 +57,6 @@ def save_predict(target: str, predict: np.ndarray, path: str):
     logger.info(f"Saving predict to {path}")
     predict_df = pd.DataFrame({target: predict})
     predict_df.to_csv(path, index=False)
-
-
-# def save_transformer(transformer, path: str):
-#     """ Save transformer from path """
-#     with open(path, 'wb') as file:
-#         pickle.dump(transformer, file, protocol=pickle.HIGHEST_PROTOCOL)
-#
-#     logger.info('Transformer saved!')
-#
-#
-# def load_transformer(path: str):
-#     """ Load transformer from path """
-#     logger.info('Transformer start loading...')
-#     with open(path, 'rb') as transformer:
-#         return pickle.load(transformer)
 
 
 def run_train_pipeline(params: TrainingParams) -> Dict[str, float]:
