@@ -3,6 +3,8 @@ import numpy as np
 import pickle
 import logging
 from typing import Union, Dict
+
+from sklearn.compose import ColumnTransformer
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import GaussianNB
 from sklearn import metrics
@@ -10,9 +12,9 @@ from sklearn.preprocessing import OneHotEncoder
 
 from ml_project.entity import TrainingParams
 from ml_project.data import split_train_val_data
-from ml_project.features import extract_target, CustomTransformer, preprocess_features
+from ml_project.features import extract_target, CustomTransformer
 
-Model = Union[LogisticRegression, GaussianNB, CustomTransformer, OneHotEncoder]
+Model = Union[LogisticRegression, GaussianNB, ColumnTransformer]
 logging.basicConfig(level="INFO")
 logger = logging.getLogger(__name__)
 
@@ -63,25 +65,30 @@ def run_train_pipeline(params: TrainingParams) -> Dict[str, float]:
     data = pd.read_csv(params.input_train_data_path)
     data, target = extract_target(data, params)
 
-    transformer = CustomTransformer(params.features.numerical_features)
-    transformer.fit(data)
-    save_model(transformer, params.transformer_path)
+    preprocess_pipeline = ColumnTransformer(
+        transformers=[
+            (
+                "numeric",
+                CustomTransformer(params.features.numerical_features),
+                params.features.numerical_features,
+            ),
+            ("categorical", OneHotEncoder(), params.features.categorical_features),
+        ]
+    )
+    preprocess_pipeline.fit(data)
+    save_model(preprocess_pipeline, params.preprocess_pipeline_path)
 
     train_data, val_data, train_target, val_target = split_train_val_data(
         data, target, params
     )
 
-    ohe = OneHotEncoder()
-    ohe.fit(data[params.features.categorical_features])
-    save_model(ohe, params.ohe_path)
-
-    preprocessed_train_data = preprocess_features(train_data, ohe, transformer, params)
+    preprocessed_train_data = preprocess_pipeline.transform(train_data)
 
     model = get_model(params)
     model.fit(preprocessed_train_data, train_target)
     save_model(model, params.model_path)
 
-    preprocessed_val_data = preprocess_features(val_data, ohe, transformer, params)
+    preprocessed_val_data = preprocess_pipeline.transform(val_data)
     predict = model.predict(preprocessed_val_data)
     result_metrics = evaluate_model(predict, val_target)
     return result_metrics
@@ -91,11 +98,10 @@ def run_test_pipeline(params: TrainingParams):
     target_col = params.features.target_col
     data = pd.read_csv(params.input_test_data_path)
 
-    transformer = open_model(params.transformer_path)
-    ohe = open_model(params.ohe_path)
+    preprocess_pipeline = open_model(params.preprocess_pipeline_path)
     model = open_model(params.model_path)
 
-    preprocessed_data = preprocess_features(data, ohe, transformer, params)
+    preprocessed_data = preprocess_pipeline.transform(data)
 
     predict = model.predict(preprocessed_data)
 

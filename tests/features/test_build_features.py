@@ -1,7 +1,6 @@
 import pandas as pd
 from ml_project import (
     extract_target,
-    preprocess_features,
     open_model,
     run_train_pipeline,
 )
@@ -31,11 +30,12 @@ def test_extract_cat_num_features(params):
 
 def test_preprocess_features(params):
     run_train_pipeline(params)
-    transformer = open_model(params.transformer_path)
-    ohe = open_model(params.ohe_path)
+    preprocess_pipeline = open_model(params.preprocess_pipeline_path)
+    # ohe = open_model(params.ohe_path)
     data = pd.read_csv(params.input_train_data_path)
 
-    preprocessed_data = preprocess_features(data, ohe, transformer, params)
+    # preprocessed_data = preprocess_features(data, ohe, transformer, params)
+    preprocessed_data = preprocess_pipeline.transform(data)
 
     cat_features = params.features.categorical_features
     num_features = params.features.numerical_features
