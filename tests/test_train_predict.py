@@ -36,7 +36,7 @@ def test_accuracy_on_real_data(real_params: TrainingParams):
 
     metrics = run_test_pipeline(real_params)
 
-    assert abs(metrics["Accuracy"] - 0.8) < 0.1
+    assert abs(metrics["Accuracy"] - 0.8) <= 0.1
     assert abs(metrics["ROC AUC score"] - 0.8) < 0.1
     assert abs(metrics["F1-score"] - 0.8) < 0.1
     assert os.path.exists(real_params.predict_path)

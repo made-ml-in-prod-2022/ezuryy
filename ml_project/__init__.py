@@ -8,7 +8,7 @@ from .entity import (
     fix_path,
     fix_config,
 )
-from .features import extract_target
+from .features import extract_target, CustomTransformer
 from .models import (
     run_train_pipeline,
     run_test_pipeline,
@@ -29,6 +29,7 @@ __all__ = [
     "fix_path",
     "fix_config",
     "extract_target",
+    "CustomTransformer",
     "run_train_pipeline",
     "run_test_pipeline",
     "save_model",
