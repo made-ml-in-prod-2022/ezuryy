@@ -21,13 +21,20 @@ logger = logging.getLogger(__name__)
 
 def get_model(params: TrainingParams) -> Union[LogisticRegression, GaussianNB]:
     logger.info(f"Model type:{params.model_type}")
+    lr_random_state = params.logistic_regression_params.random_state
+    lr_penalty = params.logistic_regression_params.penalty
+    lr_c = params.logistic_regression_params.C
     if params.model_type == "LogisticRegression":
-        model = LogisticRegression(random_state=0, penalty="l2", C=0.9)
+        model = LogisticRegression(
+            random_state=lr_random_state, penalty=lr_penalty, C=lr_c
+        )
     elif params.model_type == "GaussianNB":
         model = GaussianNB()
     else:
         logger.warning("No such model_type! Use LogisticRegression")
-        model = LogisticRegression(random_state=0, penalty="l2", C=0.9)
+        model = LogisticRegression(
+            random_state=lr_random_state, penalty=lr_penalty, C=lr_c
+        )
     return model
 
 
