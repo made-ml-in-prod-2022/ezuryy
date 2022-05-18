@@ -4,6 +4,7 @@ import yaml
 
 from .features import Features
 from .split_params import SplittingParams
+from .logistic_regression_params import LogisticRegressionParams
 
 
 @dataclass()
@@ -16,6 +17,7 @@ class TrainingParams:
     model_type: str
     features: Features
     splitting_params: SplittingParams
+    logistic_regression_params: LogisticRegressionParams
 
 
 TrainingParamsSchema = class_schema(TrainingParams)

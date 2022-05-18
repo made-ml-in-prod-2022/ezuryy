@@ -3,7 +3,7 @@ from typing import List
 import numpy as np
 import pandas as pd
 
-from ml_project import Features, TrainingParams, SplittingParams
+from ml_project import Features, TrainingParams, SplittingParams, LogisticRegressionParams
 
 
 @pytest.fixture(scope="session")
@@ -61,5 +61,6 @@ def params(
         model_type="LogisticRegression",
         features=features,
         splitting_params=SplittingParams(val_size=0.1, random_state=42, stratify=True),
+        logistic_regression_params=LogisticRegressionParams(random_state=0, penalty="l2", C=0.9)
     )
     return params

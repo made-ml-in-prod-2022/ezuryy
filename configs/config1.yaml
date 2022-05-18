@@ -25,3 +25,7 @@ splitting_params:
   val_size: 0.1
   random_state: 3
   stratify: True
+logistic_regression_params:
+  random_state: 0
+  penalty: "l2"
+  C: 0.9

@@ -2,6 +2,7 @@ from .data import split_train_val_data
 from .entity import (
     Features,
     SplittingParams,
+    LogisticRegressionParams,
     TrainingParams,
     read_training_params,
     fix_path,
@@ -22,6 +23,7 @@ __all__ = [
     "split_train_val_data",
     "Features",
     "SplittingParams",
+    "LogisticRegressionParams",
     "TrainingParams",
     "read_training_params",
     "fix_path",
