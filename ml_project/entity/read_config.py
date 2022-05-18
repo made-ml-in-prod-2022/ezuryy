@@ -10,8 +10,7 @@ from .split_params import SplittingParams
 class TrainingParams:
     input_train_data_path: str
     input_test_data_path: str
-    transformer_path: str
-    ohe_path: str
+    preprocess_pipeline_path: str
     model_path: str
     predict_path: str
     model_type: str
@@ -36,8 +35,7 @@ def fix_path(path: str) -> str:
 def fix_config(params: TrainingParams) -> TrainingParams:
     params.input_train_data_path = fix_path(params.input_train_data_path)
     params.input_test_data_path = fix_path(params.input_test_data_path)
-    params.ohe_path = fix_path(params.ohe_path)
-    params.transformer_path = fix_path(params.transformer_path)
+    params.preprocess_pipeline_path = fix_path(params.preprocess_pipeline_path)
     params.model_path = fix_path(params.model_path)
     params.predict_path = fix_path(params.predict_path)
     return params
