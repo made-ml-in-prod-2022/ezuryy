@@ -1,7 +1,7 @@
 input_train_data_path: "data_csv/train_data.csv"
 input_test_data_path: "data_csv/test_data.csv"
-preprocess_pipeline_path: "model/preprocess_pipeline.pkl"
-model_path: "model/model.pkl"
+preprocess_pipeline_path: "model/preprocess_pipeline_19.pkl"
+model_path: "model/model_19.pkl"
 predict_path: "data_csv/predict.csv"
 model_type: "LogisticRegression"
 features:

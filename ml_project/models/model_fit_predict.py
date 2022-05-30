@@ -74,11 +74,11 @@ def run_train_pipeline(params: TrainingParams) -> Dict[str, float]:
 
     preprocess_pipeline = ColumnTransformer(
         transformers=[
-            (
-                "numeric",
-                CustomTransformer(params.features.numerical_features),
-                params.features.numerical_features,
-            ),
+            # (
+            #     "numeric",
+            #     CustomTransformer(params.features.numerical_features),
+            #     params.features.numerical_features,
+            # ),
             ("categorical", OneHotEncoder(), params.features.categorical_features),
         ]
     )
