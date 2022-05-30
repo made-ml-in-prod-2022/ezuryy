@@ -16,4 +16,4 @@ black==22.3.0
 fastapi==0.63.0
 uvicorn==0.13.4
 requests==2.27.1
-pydantic==2.27.1
+pydantic==1.9.1
