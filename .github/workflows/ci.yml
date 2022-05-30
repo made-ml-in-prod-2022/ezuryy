@@ -22,4 +22,4 @@ jobs:
           cd online_inference
           python -m pytest test.py
       - name: Run flake8
-        run: flake8 --max-line-length 90 .
+        run: flake8 --max-line-length 90 online_inference
