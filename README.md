@@ -5,7 +5,6 @@
 ~~~
 docker build -t server:v1 -f online_inference/Dockerfile .
 docker run --rm -p 8000:8000 server:v1
-python make_request.py 
 ~~~
 
 В новом окне терминала из директории online_inference запускается скрипт, отправляющий запросы
