@@ -54,8 +54,7 @@ def main():
 @app.on_event("startup")
 def load_model():
     global model
-    model_path = os.getenv("PATH_TO_MODEL", default='model/model_19.pkl')
-    print("PATH_TO_MODEL: ", model_path)
+    model_path = os.getenv("PATH_TO_MODEL", default='../model/model_19.pkl')
     if model_path is None:
         err = f"PATH_TO_MODEL {model_path} is None"
         logger.error(err)
@@ -64,8 +63,7 @@ def load_model():
     model = load_object(model_path)
 
     global preprocess_pipeline
-    pipe_path = os.getenv("PATH_TO_PIPE", default='model/preprocess_pipeline_19.pkl')
-    print("PATH_TO_PIPE: ", pipe_path)
+    pipe_path = os.getenv("PATH_TO_PIPE", default='../model/preprocess_pipeline_19.pkl')
     if pipe_path is None:
         err = f"PATH_TO_PIPE {pipe_path} is None"
         logger.error(err)
